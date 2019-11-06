@@ -50,10 +50,6 @@
  */
 public class Main0008 {
 
-    public static void main(String[] args) {
-        System.out.printf(myAtoi("+123")+"");
-    }
-
     public static int myAtoi(String str) {
         if(str.isEmpty() || str.length() == 0){
             return 0;
