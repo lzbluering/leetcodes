@@ -1,5 +1,6 @@
 /**
  * 正则表达式匹配
+ *
  * 给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 '.' 和 '*' 的正则表达式匹配。
  *
  * '.' 匹配任意单个字符
@@ -51,9 +52,62 @@
  */
 public class Main0010 {
 
-    public boolean isMatch(String s, String p) {
-        return false;
+    private static Boolean[][] dp;
+
+    public static void main(String[] args) {
+        System.out.printf(isMatch("abc", "a.c*")+"");
     }
 
+    public static boolean isMatch(String s, String p) {
+        dp = new Boolean[s.length()+1][p.length()+1];
+        return isMyMatch(s, p, 0, 0);
+    }
+
+    public static boolean isMyMatch(String s, String p, int m, int n) {
+        if(dp[m][n] != null){
+            return dp[m][n];
+        }
+        if(n>=p.length()){
+            dp[m][n] = m>=s.length() ? true : false;
+            return dp[m][n];
+        }
+        boolean firstBoolean = m<s.length() && (s.charAt(m) == p.charAt(n) || p.charAt(n) == '.');
+        if(n+1 < p.length() && p.charAt(n+1) == '*'){
+            dp[m][n] = isMyMatch(s, p, m, n+2) || firstBoolean && isMyMatch(s, p, m+1, n);
+
+        }else{
+            dp[m][n] = firstBoolean && isMyMatch(s, p, m+1, n+1);
+        }
+        return dp[m][n];
+    }
 
 }
+/**
+ * 解题思路：
+ * 一、暴力破解思路解析
+ * 若是常规的两个字符串对比，仅仅有'.'匹配符
+ *     public static boolean isMyMatch(String s, String p, int m, int n) {
+ *         if(n>=p.length()){
+ *             return m>=s.length() ? true : false;
+ *         }
+ *         boolean firstBoolean = m<s.length() && (s.charAt(m) == p.charAt(n) || p.charAt(n) == '.');
+ *         return firstBoolean && isMyMatch(s, p, m+1, n+1);
+ *     }
+ * 此时考虑'*'匹配符：
+ *     public static boolean isMyMatch(String s, String p, int m, int n) {
+ *         if(n>=p.length()){
+ *             return m>=s.length() ? true : false;
+ *         }
+ *         boolean firstBoolean = m<s.length() && (s.charAt(m) == p.charAt(n) || p.charAt(n) == '.');
+ *         if(n+1 < p.length() && p.charAt(n+1) == '*'){
+ *             return isMyMatch(s, p, m, n+2) || firstBoolean && isMyMatch(s, p, m+1, n);
+ *         }
+ *         return firstBoolean && isMyMatch(s, p, m+1, n+1);
+ *     }
+ *     即当前匹配正则表达式字符后一位是'*',则考虑：
+ *         1、当前正则表达式字符若相同则继续与下一位字符匹配
+ *         2、当前正则表达式字符若不相同则当前字符跳过'*'字符继续与正则表达式字符匹配
+ * 二、动态规划
+ * 添加备忘录dp[i][j],记录s[i]与p[j]是否匹配的状态：
+ *     代码如上
+ */
