@@ -26,31 +26,43 @@
  */
 public class Main0025 {
 
-//    public ListNode reverseKGroup(ListNode head, int k) {
-//
-//        if(head == null || k <= 1){
-//            return head;
-//        }
-//
-//        ListNode ans = new ListNode(-1);
-//        ListNode temp = ans;
-//        ListNode l1 = head;
-//        ListNode l2 = head.next;
-//
-//    }
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
 
-//    private ListNode swap(ListNode head, int k) {
-//
-//        if(head == null || k <= 1){
-//            return head;
-//        }
-//
-//        ListNode ans = new ListNode(-1);
-//        ListNode temp = ans;
-//        ListNode l1 = head;
-//        ListNode l2 = head.next;
-//
-//    }
+        ListNode pre = dummy;
+        ListNode end = dummy;
+
+        while (end.next != null) {
+            for (int i = 0; i < k && end != null; i++){
+                end = end.next;
+            }
+            if (end == null){
+                break;
+            }
+            ListNode start = pre.next;
+            ListNode next = end.next;
+            end.next = null;
+            pre.next = reverse(start);
+            start.next = next;
+            pre = start;
+
+            end = pre;
+        }
+        return dummy.next;
+    }
+
+    private ListNode reverse(ListNode head) {
+        ListNode pre = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = pre;
+            pre = curr;
+            curr = next;
+        }
+        return pre;
+    }
 
 }
 /**
@@ -60,4 +72,8 @@ public class Main0025 {
  *     ListNode next;
  *     ListNode(int x) { val = x; }
  * }
+ */
+/**
+ * 解题思路：
+ * 未完成
  */
