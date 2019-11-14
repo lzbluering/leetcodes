@@ -1,3 +1,5 @@
+package suanfa;
+
 /**
  * ÊµÏÖ?strStr()?º¯Êı¡£
  *

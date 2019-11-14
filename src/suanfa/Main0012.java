@@ -1,3 +1,5 @@
+package suanfa;
+
 import org.omg.CORBA.INTERNAL;
 
 import java.util.HashMap;

@@ -1,3 +1,5 @@
+package suanfa;
+
 /**
  * 两两交换链表中的节点
  *
@@ -43,9 +45,9 @@ public class Main0024 {
 }
 /**
  * Definition for singly-linked list.
- * public class ListNode {
+ * public class suanfa.ListNode {
  *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
+ *     suanfa.ListNode next;
+ *     suanfa.ListNode(int x) { val = x; }
  * }
  */

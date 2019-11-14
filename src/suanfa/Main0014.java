@@ -1,3 +1,5 @@
+package suanfa;
+
 /**
  * 最长公共前缀
  *

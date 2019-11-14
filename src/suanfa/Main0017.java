@@ -1,3 +1,5 @@
+package suanfa;
+
 import sun.java2d.windows.GDIWindowSurfaceData;
 
 import java.util.HashMap;
