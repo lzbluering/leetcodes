@@ -26,11 +26,25 @@ package suanfa;
 public class Main0028 {
 
     public int strStr(String haystack, String needle) {
+
+        int len = needle.length();
+        if(len == 0){
+            return 0;
+        }
+        for(int i=0; i<=haystack.length()-len; i++){
+            if(haystack.charAt(i) == needle.charAt(0) && haystack.substring(i, i+len).equals(needle)){
+                return i;
+            }
+        }
+
         return -1;
     }
 
 }
 /**
  * 解题思路：
- * KMP 算法
+ * 滑动窗口
+ * 方法一：暴力破解
+ * 方法二：优化
+ * 方法三：比较子串hash
  */
